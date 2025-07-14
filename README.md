@@ -14,7 +14,7 @@ Accompanies paper:<br>
 <br>
 Bradshaw, CJA, A Naglis, F Saltré, C Mudge, J Llewelyn. Island biogeography similarly predicts species and trait diversity of vertebrate communities on oceanic islands (in preparation)<br>
 
-## <a href="https://github.com/cjabradshaw/AusIslBiogeogrTraits/tree/main/data/traits">Scripts</a>
+## <a href="https://github.com/cjabradshaw/AusIslBiogeogrTraits/tree/main/data/scripts">Scripts</a>
 - <code>islbiogeogrtraits.R</code>: R code for all analyses
 
 ## <a href="https://github.com/cjabradshaw/AusIslBiogeogrTraits/tree/main/data">Data</a>
