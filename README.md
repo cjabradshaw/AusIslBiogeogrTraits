@@ -27,6 +27,9 @@ Bradshaw, CJA, A Naglis, F Saltré, C Mudge, J Llewelyn. Island biogeography sim
 - <em>ausislandsAlbersGeom_corrected.zip</em>: Australian islands shapefile  (Australian Albers Equal Area projection) after removing ~ 30% of islands following criteria outlined in the main text.
 - <em>mainlandsLL.zip</em>: mainlands (Australia and surrounding continents) in lat/lon datum.
 
+### RDS
+Due to file-size constraints in Github, we do not provide the *.rds (serialised interface for single objects) files mentioned in the script. However, these files are not required to repeat the analyses because the pre-processed GIS shapefiles (ausislavala.shp, ausislmamala.shp, ausislreptala.shp, ausislamphala.shp) include the necessary information (code with *.rds files shown for understanding the workflow only).
+
 ### Trait data
 #### Birds
 - <em>AVONET1_Birdlife.xlsx</em>: <a href="https://doi.org/10.1111/ele.13898">AVONET</a> BirdLife traits dataset
