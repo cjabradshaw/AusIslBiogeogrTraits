@@ -19,10 +19,10 @@ Bradshaw, CJA, A Naglis, F Saltré, C Mudge, J Llewelyn. Island biogeography sim
 
 ## Data
 ### GIS layers
-- <em>ausislavala.zip</em>: Atlas of Living Australia data for bird species (shapefile). Due to Github file-size constraints, we have broken the zip file into similar-sized chunks. Combine chunks aa to ah using the following Terminal (or equivalent) command: <code>cat ausislavalazip_chunk_* > ausislavala.zip</code>. Once chunks are recombined, unzip the corresponding shapefile.
-- <em>reptislavala.zip</em>: Atlas of Living Australia data for reptile species (shapefile).
-- <em>mamaislavala.zip</em>: Atlas of Living Australia data for mammal species (shapefile).
-- <em>amphislavala.zip</em>: Atlas of Living Australia data for amphibians species (shapefile).
+- <em>ausislavala.zip</em>: <a href="https://www.ala.org.au">Atlas of Living Australia</a> data for bird species (shapefile). Due to Github file-size constraints, we have broken the zip file into similar-sized chunks. Combine chunks aa to ah using the following Terminal (or equivalent) command: <code>cat ausislavalazip_chunk_* > ausislavala.zip</code>. Once chunks are recombined, unzip the corresponding shapefile.
+- <em>reptislavala.zip</em>: <a href="https://www.ala.org.au">Atlas of Living Australia</a> data for reptile species (shapefile).
+- <em>mamaislavala.zip</em>: <a href="https://www.ala.org.au">Atlas of Living Australia</a> data for mammal species (shapefile).
+- <em>amphislavala.zip</em>: <a href="https://www.ala.org.au">Atlas of Living Australia</a> data for amphibians species (shapefile).
 - <em>ausislands.zip</em>: Australian islands shapefile (Australian Albers Equal Area projection).
 - <em>ausislandsAlbersGeom_corrected.zip</em>: Australian islands shapefile  (Australian Albers Equal Area projection) after removing ~ 30% of islands following criteria outlined in the main text.
 - <em>mainlandsLL.zip</em>: mainlands (Australia and surrounding continents) in lat/lon datum.
