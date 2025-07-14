@@ -14,11 +14,11 @@ Accompanies paper:<br>
 <br>
 Bradshaw, CJA, A Naglis, F Saltré, C Mudge, J Llewelyn. Island biogeography similarly predicts species and trait diversity of vertebrate communities on oceanic islands (in preparation)<br>
 
-## Scripts
+## <a href="https://github.com/cjabradshaw/AusIslBiogeogrTraits/tree/main/data/traits">Scripts</a>
 - <code>islbiogeogrtraits.R</code>: R code for all analyses
 
-## Data
-### GIS layers
+## <a href="https://github.com/cjabradshaw/AusIslBiogeogrTraits/tree/main/data">Data</a>
+### <a href="https://github.com/cjabradshaw/AusIslBiogeogrTraits/tree/main/data/gis">GIS layers</a>
 - <em>ausislavala.zip</em>: <a href="https://www.ala.org.au">Atlas of Living Australia</a> data for bird 🦅 species (shapefile). Due to Github file-size constraints, we have broken the zip file into similar-sized chunks. Combine chunks aa to ah using the following Terminal (or equivalent) command: <code>cat ausislavalazip_chunk_* > ausislavala.zip</code>. Once chunks are recombined, unzip the corresponding shapefile.
 - <em>reptislavala.zip</em>: <a href="https://www.ala.org.au">Atlas of Living Australia</a> data for reptile 🦎 species (shapefile).
 - <em>mamaislavala.zip</em>: <a href="https://www.ala.org.au">Atlas of Living Australia</a> data for mammal 🦘 species (shapefile).
@@ -27,14 +27,14 @@ Bradshaw, CJA, A Naglis, F Saltré, C Mudge, J Llewelyn. Island biogeography sim
 - <em>ausislandsAlbersGeom_corrected.zip</em>: Australian islands shapefile  (Australian Albers Equal Area projection) after removing ~ 30% of islands following criteria outlined in the main text.
 - <em>mainlandsLL.zip</em>: mainlands (Australia and surrounding continents) in lat/lon datum.
 
-### Distance
+### <a href="https://github.com/cjabradshaw/AusIslBiogeogrTraits/tree/main/data/distance">Distance</a>
 - <em>ausIslDist2mainlAlbers.csv</em>: shortest straight-line distance of all Australian islands to mainland.
 - <em>d2ausislandscorr.csv</em>: shortest straight-line distance of processed (i.e., removing ~ 30% of islands; see main text) Australian islands to mainland.
 
 ### RDS
 Due to file-size constraints in Github, we do not provide the *.rds (serialised interface for single objects) files mentioned in the script. However, these files are not required to repeat the analyses because the pre-processed GIS shapefiles (ausislavala.shp, ausislmamala.shp, ausislreptala.shp, ausislamphala.shp) include the necessary information (code with *.rds files shown for understanding the workflow only).
 
-### Traits
+### <a href="https://github.com/cjabradshaw/AusIslBiogeogrTraits/tree/main/data/traits">Traits</a>
 #### Birds
 - <em>AVONET1_Birdlife.xlsx</em>: <a href="https://doi.org/10.1111/ele.13898">AVONET</a> BirdLife bird 🐦‍⬛ traits dataset
 - <em>AVONET2_eBird.xlsx</em>: <a href="https://doi.org/10.1111/ele.13898">AVONET</a> eBird traits bird 🐦‍⬛ dataset
