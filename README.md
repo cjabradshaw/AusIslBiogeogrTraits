@@ -1,5 +1,5 @@
 # Island biogeography predicts vertebrate trait space
-<img align="bottom-left" src="www/GirraweenCoring.jpg" alt="coring on Girraween Lagoon" width="350" style="margin-bottom: 20px">
+<img align="bottom-left" src="www/aus islands map.jpg" alt="islands of Australia" width="350" style="margin-bottom: 20px">
 
 <br>
 Corey Bradshaw<br>
