@@ -12,7 +12,7 @@ John Llewelyn<br>
 <br>
 Accompanies paper:<br>
 <br>
-Island biogeography similarly predicts species and trait diversity of vertebrate communities on oceanic islands (in preparation)<br>
+Bradshaw, CJA, A Naglis, F Saltré, C Mudge, J Llewelyn. Island biogeography similarly predicts species and trait diversity of vertebrate communities on oceanic islands (in preparation)<br>
 
 ## Scripts
 - <code>islbiogeogrtraits.R</code>: R code for all analyses
