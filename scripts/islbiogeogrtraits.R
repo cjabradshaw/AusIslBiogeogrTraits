@@ -136,8 +136,9 @@ sf_ausbbox_polygon4 <- st_as_sfc(sf_ausbbox4)
 sf_ausbbox_df4 <- st_sf(geometry = sf_ausbbox_polygon4)
 print(sf_ausbbox_df4)
 
-
-# get ALA data
+# **********************************************************************************************
+# **** get ALA data (can skip this entire section to line 525 to avoid pre-processing steps) ***
+# **********************************************************************************************
 # set configuration
 galah_config(email = "YOUREMAIL@SERVER.AU")
 galah_config(caching = TRUE)
