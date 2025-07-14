@@ -21,7 +21,6 @@ library(terra)
 ############################
 
 ## important all island data
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/data")
 ausisldat <- read.csv("ausIslDist2mainlAlbers.csv", header=TRUE)
 head(ausisldat)
 dim(ausisldat)
@@ -31,7 +30,6 @@ hist(log10(ausisldat$area), xlab="log10(island area)", ylab="frequency", main=""
 hist(log10(ausisldat$distance), xlab="log10(distance to mainland)", ylab="frequency", main="") # distance in metres
 
 ## plot spatial data
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/gis")
 # AUS islands
 ausisles <- vect("ausislands.shp")
 ausisles
@@ -44,7 +42,6 @@ plot(mainl, col="tan", alpha=0.5, border=NULL, lwd=0.5, add=TRUE)
 
 ## import corrected island data (removing Tasmania, its islands, islands in Torres Strait closer to PNG,
 ## some islands off Timor, and a few south of Kangaroo Island) — remove 'stepping stone' effect where possible
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/out")
 ausisldatcorr <- read.csv("d2ausislandscorr.csv", header=TRUE)
 head(ausisldatcorr)
 dim(ausisldatcorr)
@@ -61,7 +58,6 @@ hist(log10(ausisldatcorr$distance/1000), xlab="log10 distance to mainland (km))"
 sort(ausisldatcorr$distance/1000, decreasing=TRUE)[1:10] # area in km2
 
 ## AUS islands corrected as above
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/gis")
 ausislescorr <- vect("ausislandsAlbersGeom_corrected.shp")
 ausislescorr
 plot(ausislescorr, col="red", border=NULL, lwd=0.5)
@@ -143,7 +139,7 @@ print(sf_ausbbox_df4)
 
 # get ALA data
 # set configuration
-galah_config(email = "cjabradshaw@gmail.com")
+galah_config(email = "YOUREMAIL@SERVER.AU")
 galah_config(caching = TRUE)
 show_all(reasons)
 galah_config(download_reason_id = 4)
@@ -158,7 +154,6 @@ ausmamala.dat1 <- galah_call(method = "data",
 head(ausmamala.dat)
 
 # save to RDS
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/rds")
 saveRDS(ausmamala.dat1, file = "ausmamala1.rds")
 
 # **********************************************
@@ -175,7 +170,6 @@ ausavala1.dat <- galah_call(method = "data",
   atlas_occurrences()
 head(ausavala1.dat)
 
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/rds")
 saveRDS(ausavala1.dat, file = "ausavala1.rds")
 
 ausavala2.dat <- galah_call(method = "data",
@@ -185,7 +179,6 @@ ausavala2.dat <- galah_call(method = "data",
   atlas_occurrences()
 head(ausavala2.dat)
 
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/rds")
 saveRDS(ausavala2.dat, file = "ausavala2.rds")
 
 ausavala3.dat <- galah_call(method = "data",
@@ -194,7 +187,6 @@ ausavala3.dat <- galah_call(method = "data",
   geolocate(sf_ausbbox_polygon3, type = "bbox") |>
   atlas_occurrences()
 
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/rds")
 saveRDS(ausavala3.dat, file = "ausavala3.rds")
 
 ausavala4.dat <- galah_call(method = "data",
@@ -203,12 +195,10 @@ ausavala4.dat <- galah_call(method = "data",
   geolocate(sf_ausbbox_polygon4, type = "bbox") |>
   atlas_occurrences()
 
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/rds")
 saveRDS(ausavala4.dat, file = "ausavala4.rds")
 
 # **********************************************
 # skip step above for data downloaded 09.07.2025
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/rds")
 ausavala1.dat <- readRDS("ausavala1.rds")
 ausavala2.dat <- readRDS("ausavala2.rds")
 ausavala3.dat <- readRDS("ausavala3.rds")
@@ -228,12 +218,10 @@ ausreptala.dat <- galah_call(method = "data",
   atlas_occurrences()
 head(ausreptala.dat)
 
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/rds")
 saveRDS(ausreptala.dat, file = "ausreptala.rds")
 
 # **********************************************
 # skip step above for data downloaded 09.07.2025
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/rds")
 ausreptala.dat <- readRDS("ausreptala.rds")
 # **********************************************
 
@@ -246,12 +234,10 @@ ausamphala.dat <- galah_call(method = "data",
   atlas_occurrences()
 head(ausamphala.dat)
 
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/rds")
 saveRDS(ausamphala.dat, file = "ausamphala.rds")
 
 # **********************************************
 # skip step above for data downloaded 09.07.2025
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/rds")
 ausamphala.dat <- readRDS("ausamphala.rds")
 # **********************************************
 
@@ -492,6 +478,7 @@ rm(ausamphala.dat2, ausamphala.dat3, ausamphala.dat4, ausamphala.dat5,
 
 # convert to terra vector point object
 ausmamala.vect <- terra::vect(ausmamala.dat10, geom=c("decimalLongitude", "decimalLatitude"), crs="epsg:4326")
+
 # keep only 'recordID', 'scientificName', 'eventDate' columns
 ausmamala.vect2 <- ausmamala.vect[, -c(3,5,6)]
 ausmamala.vect2
@@ -521,7 +508,6 @@ plot(mainl, col="tan", alpha=0.5, border=NULL, lwd=0.5, add=TRUE)
 
 # save vectors to .rds files
 # save rasters to RDS
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/rds")
 saveRDS(ausmamala.vect2, file = "ausmamalavect2.rds")
 saveRDS(ausavala.vect2, file = "ausavalavect2.rds")
 saveRDS(ausreptala.vect2, file = "ausreptalavect2.rds")
@@ -529,7 +515,6 @@ saveRDS(ausamphala.vect2, file = "ausreptalavect2.rds")
 saveRDS(ausislescorr, file = "ausislescorr.rds")
 
 # write to shapefiles for faster processing in QGIS
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/gis")
 writeVector(ausmamala.vect2, filename = "ausmamala.shp", overwrite = TRUE)# export to shapefile
 writeVector(ausavala.vect2, filename = "ausavala.shp", overwrite = TRUE)# export to shapefile
 writeVector(ausreptala.vect2, filename = "ausreptala.shp", overwrite = TRUE)# export to shapefile
@@ -537,7 +522,6 @@ writeVector(ausamphala.vect2, filename = "ausamphala.shp", overwrite = TRUE)# ex
 
 #***************************************
 ## re-read shapefiles for new session
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/gis")
 ausmamala.vect2 <- vect("ausmamala.shp")
 ausavala.vect2 <- vect("ausavala.shp")
 ausreptala.vect2 <- vect("ausreptala.shp")
@@ -546,7 +530,6 @@ ausamphala.vect2 <- vect("ausamphala.shp")
 
 
 # once processed in QGIS, import intersected shapefiles
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/gis")
 ausisles.mamala <- vect("ausislmamala.shp")
 ausisles.avala <- vect("ausislavala.shp")
 ausisles.reptala <- vect("ausislreptala.shp")
@@ -2817,7 +2800,6 @@ mam.brt.partial.deps <- list()
 mam.pred.names <- ausmamIB.brt$var.names
 eq.sp.pts <- 100
 
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/out")
 for(i in seq_along(mam.pred.names)) {
   # Use gbm.plot to get partial dependency values
   # Set plot.layout = c(1,1) to prevent automatic plotting
@@ -2874,7 +2856,6 @@ av.brt.partial.deps <- list()
 av.pred.names <- ausavIB.brt$var.names
 eq.sp.pts <- 100
 
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/out")
 for(i in seq_along(av.pred.names)) {
   # Use gbm.plot to get partial dependency values
   # Set plot.layout = c(1,1) to prevent automatic plotting
@@ -2932,7 +2913,6 @@ rept.brt.partial.deps <- list()
 rept.pred.names <- ausreptIB.brt$var.names
 eq.sp.pts <- 100
 
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/out")
 for(i in seq_along(rept.pred.names)) {
   # Use gbm.plot to get partial dependency values
   # Set plot.layout = c(1,1) to prevent automatic plotting
@@ -2990,7 +2970,6 @@ amph.brt.partial.deps <- list()
 amph.pred.names <- ausamphIB.brt$var.names
 eq.sp.pts <- 100
 
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/out")
 for(i in seq_along(amph.pred.names)) {
   # Use gbm.plot to get partial dependency values
   # Set plot.layout = c(1,1) to prevent automatic plotting
@@ -3037,7 +3016,6 @@ ausislalaNoZero.NoDups <- ausislalaNoZero[, !duplicated(as.list(ausislalaNoZero)
 head(ausislalaNoZero.NoDups)
 
 # export .csv
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/out")
 write.csv(ausislalaNoZero.NoDups, "AusIslalaNoZero.NoDups.csv", row.names=FALSE)
 
 # plot with ggplot2
@@ -3154,7 +3132,6 @@ predMamSR.sort <- predMamSR.dat[order(predMamSR.dat$areakm2, decreasing=T),]
 head(predMamSR.sort)
 
 # export
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/out")
 write.csv(predMamSR.sort, "predMamSRsort.csv", row.names=FALSE)
 
 
@@ -3182,7 +3159,6 @@ predAvSR.sort <- predAvSR.dat[order(predAvSR.dat$areakm2, decreasing=T),]
 head(predAvSR.sort)
 
 # export
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/out")
 write.csv(predAvSR.sort, "predAvSRsort.csv", row.names=FALSE)
 
 # reptiles
@@ -3209,7 +3185,6 @@ predReptSR.sort <- predReptSR.dat[order(predReptSR.dat$areakm2, decreasing=T),]
 head(predReptSR.sort)
 
 # export
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/out")
 write.csv(predReptSR.sort, "predReptSRsort.csv", row.names=FALSE)
 
 # amphibians
@@ -3236,7 +3211,6 @@ predAmphSR.sort <- predAmphSR.dat[order(predAmphSR.dat$areakm2, decreasing=T),]
 head(predAmphSR.sort)
 
 # export
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/out")
 write.csv(predAmphSR.sort, "predAmphSRsort.csv", row.names=FALSE)
 
 
@@ -3264,7 +3238,6 @@ predReptSR.sort <- predReptSR.dat[order(predReptSR.dat$areakm2, decreasing=T),]
 head(predReptSR.sort)
 
 # export
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/out")
 write.csv(predReptSR.sort, "predReptSRsort.csv", row.names=FALSE)
 
 # vertebrates (mammals + birds + amphibians + reptiles)
@@ -3291,7 +3264,6 @@ predVertSR.sort <- predVertSR.dat[order(predVertSR.dat$areakm2, decreasing=T),]
 head(predVertSR.sort)
 
 # export
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/out")
 write.csv(predVertSR.sort, "predVertSRsort.csv", row.names=FALSE)
 
 
@@ -3427,7 +3399,6 @@ vert.z.dat <- data.frame(rem.spp=rem.spp.vec,
                       amph.z=amph.z.dat$z, amph.z.se=amph.z.dat$z.se)
 # export
 head(vert.z.dat)
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/out")
 write.csv(vert.z.dat, "vertZdat.csv", row.names=FALSE)
 
 
@@ -3442,7 +3413,6 @@ write.csv(vert.z.dat, "vertZdat.csv", row.names=FALSE)
 ## mammals
 
 # import trait data
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/data/SahulTraits")
 mamtraits <- read.csv("SahulTraitsMam.csv", header=TRUE)
 head(mamtraits)
 
@@ -3739,7 +3709,6 @@ dim(SARlinpred.sort)
 head(ausisles.mamala.traitIndices)
 
 # output data for outside graphing
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/out")
 write.csv(SARlinpred.sort, file="AUS_SARlinpredmam.csv", row.names=FALSE)
 
 ## functional richness
@@ -3768,7 +3737,6 @@ dim(FRIClinpred.sort)
 head(ausisles.mamala.traitIndices)
 
 # output data for outside graphing
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/out")
 write.csv(FRIClinpred.sort, file="AUS_FRIClinpredmam.csv", row.names=FALSE)
 
 ## functional nearest-neighbour distance
@@ -3801,7 +3769,6 @@ dim(FNNDlinpred.sort)
 head(ausisles.mamala.traitIndices)
 
 # output data for outside graphing
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/out")
 write.csv(FNNDlinpred.sort, file="AUS_FNNDlinpredmam.csv", row.names=FALSE)
 
 
@@ -3875,7 +3842,6 @@ FD.SR.fnnd.plot
 mamTraitSRout <- merge(mamausislnoZero, ausisles.mamala.traitIndices, by="FID", all.x=F)
 head(mamTraitSRout)
 dim(mamTraitSRout)
-setwd("/Users/brad0317/Documents/Papers/Biogeography/Aus Isl traits/out")
 write.csv(mamTraitSRout, file="AUSislmamTraitSR.csv", row.names=FALSE)
 
 
@@ -3901,7 +3867,6 @@ abline(FRIClinfit.sc, col="blue", lwd=2, lty=2)
 #############################
 #############################
 
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/data/bird traits/")
 
 # read in 3 versions (different taxonomy used in each)
 bl <- read_excel ("TraitData/AVONET1_Birdlife.xlsx", sheet = "AVONET1_BirdLife")
@@ -4287,7 +4252,6 @@ dim(SARlinpred.sort)
 head(ausisles.avala.traitIndices)
 
 # output data for outside graphing
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/out")
 write.csv(SARlinpred.sort, file="AUS_SARlinpredav.csv", row.names=FALSE)
 
 ## functional richness
@@ -4316,7 +4280,6 @@ dim(FRIClinpred.sort)
 head(ausisles.mamala.traitIndices)
 
 # output data for outside graphing
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/out")
 write.csv(FRIClinpred.sort, file="AUS_FRIClinpredav.csv", row.names=FALSE)
 
 ## functional nearest-neighbour distance
@@ -4349,7 +4312,6 @@ dim(FNNDlinpred.sort)
 head(ausisles.mamala.traitIndices)
 
 # output data for outside graphing
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/out")
 write.csv(FNNDlinpred.sort, file="AUS_FNNDlinpredav.csv", row.names=FALSE)
 
 
@@ -4437,7 +4399,6 @@ FD.SR.fnnd.plot
 avTraitSRout <- merge(avausislnoZero, ausisles.avala.traitIndices, by="FID", all.x=F)
 head(avTraitSRout)
 dim(avTraitSRout)
-setwd("/Users/brad0317/Documents/Papers/Biogeography/Aus Isl traits/out")
 write.csv(avTraitSRout, file="AUSislavTraitSR.csv", row.names=FALSE)
 
 hist(logit(avTraitSRout$fric))
@@ -4456,5 +4417,4 @@ abline(FRIClinfit.sc, col="red", lwd=2, lty=2)
 
 
 ## save workspace
-setwd("~/Documents/Papers/Biogeography/Aus Isl traits/R images")
 save.image(file="AUS_Isl_traits.RData")
