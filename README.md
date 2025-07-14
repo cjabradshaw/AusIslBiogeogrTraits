@@ -19,10 +19,10 @@ Bradshaw, CJA, A Naglis, F Saltré, C Mudge, J Llewelyn. Island biogeography sim
 
 ## Data
 ### GIS layers
-- <em>ausislavala.zip</em>: <a href="https://www.ala.org.au">Atlas of Living Australia</a> data for bird species (shapefile). Due to Github file-size constraints, we have broken the zip file into similar-sized chunks. Combine chunks aa to ah using the following Terminal (or equivalent) command: <code>cat ausislavalazip_chunk_* > ausislavala.zip</code>. Once chunks are recombined, unzip the corresponding shapefile.
-- <em>reptislavala.zip</em>: <a href="https://www.ala.org.au">Atlas of Living Australia</a> data for reptile species (shapefile).
-- <em>mamaislavala.zip</em>: <a href="https://www.ala.org.au">Atlas of Living Australia</a> data for mammal species (shapefile).
-- <em>amphislavala.zip</em>: <a href="https://www.ala.org.au">Atlas of Living Australia</a> data for amphibians species (shapefile).
+- <em>ausislavala.zip</em>: <a href="https://www.ala.org.au">Atlas of Living Australia</a> data for bird 🦅 species (shapefile). Due to Github file-size constraints, we have broken the zip file into similar-sized chunks. Combine chunks aa to ah using the following Terminal (or equivalent) command: <code>cat ausislavalazip_chunk_* > ausislavala.zip</code>. Once chunks are recombined, unzip the corresponding shapefile.
+- <em>reptislavala.zip</em>: <a href="https://www.ala.org.au">Atlas of Living Australia</a> data for reptile 🦎 species (shapefile).
+- <em>mamaislavala.zip</em>: <a href="https://www.ala.org.au">Atlas of Living Australia</a> data for mammal 🦘 species (shapefile).
+- <em>amphislavala.zip</em>: <a href="https://www.ala.org.au">Atlas of Living Australia</a> data for amphibians 🐸 species (shapefile).
 - <em>ausislands.zip</em>: Australian islands shapefile (Australian Albers Equal Area projection). Derived from the <a href="http://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs-edition-3/jul2021-jun2026/access-and-downloads/digital-boundary-files">Australian Bureau of Statistics</a>.
 - <em>ausislandsAlbersGeom_corrected.zip</em>: Australian islands shapefile  (Australian Albers Equal Area projection) after removing ~ 30% of islands following criteria outlined in the main text.
 - <em>mainlandsLL.zip</em>: mainlands (Australia and surrounding continents) in lat/lon datum.
@@ -36,12 +36,12 @@ Due to file-size constraints in Github, we do not provide the *.rds (serialised 
 
 ### Traits
 #### Birds
-- <em>AVONET1_Birdlife.xlsx</em>: <a href="https://doi.org/10.1111/ele.13898">AVONET</a> BirdLife traits dataset
-- <em>AVONET2_eBird.xlsx</em>: <a href="https://doi.org/10.1111/ele.13898">AVONET</a> eBird traits dataset
-- <em>AVONET3_BirdTree.xlsx</em>: <a href="https://doi.org/10.1111/ele.13898">AVONET</a> BirdTree traits dataset
+- <em>AVONET1_Birdlife.xlsx</em>: <a href="https://doi.org/10.1111/ele.13898">AVONET</a> BirdLife bird 🐦‍⬛ traits dataset
+- <em>AVONET2_eBird.xlsx</em>: <a href="https://doi.org/10.1111/ele.13898">AVONET</a> eBird traits bird 🐦‍⬛ dataset
+- <em>AVONET3_BirdTree.xlsx</em>: <a href="https://doi.org/10.1111/ele.13898">AVONET</a> BirdTree bird 🐦‍⬛ traits dataset
 
 #### Mammals
-- <em>SahulTraitsMam.csv</em>: SahulTraits mammal traits database
+- <em>SahulTraitsMam.csv</em>: SahulTraits mammal 🦘 traits database
 
 ## Required R libraries
 <code>dismo</code>, <code>dplyr</code>, <code>galah</code>, <code>gawdis</code>, <code>gbm</code>, <code>ggplot2</code>, <code>gridExtra</code>, <code>mFD</code>, <code>readxl</code>,<code>sf</code>, <code>terra</code>
