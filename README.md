@@ -22,12 +22,12 @@ Bradshaw, CJA, A Naglis, F Saltré, C Mudge, J Llewelyn. Island biogeography sim
 
 ### Trait data
 #### Birds
-- AVONET1_Birdlife.xlsx: AVONET BirdLife traits dataset
-- AVONET2_eBird.xlsx: AVONET eBird traits dataset
-- AVONET3_BirdTree.xlsx: AVONET BirdTree traits dataset
+- <em>AVONET1_Birdlife.xlsx</em>: <a href="https://doi.org/10.1111/ele.13898">AVONET</a> BirdLife traits dataset
+- <em>AVONET2_eBird.xlsx</em>: <a href="https://doi.org/10.1111/ele.13898">AVONET</a> eBird traits dataset
+- <em>AVONET3_BirdTree.xlsx</em>: <a href="https://doi.org/10.1111/ele.13898">AVONET</a> BirdTree traits dataset
 
 #### Mammals
-- SahulTraitsMam.csv: SahulTraits mammal traits database
+- <em>SahulTraitsMam.csv</em>: SahulTraits mammal traits database
 
 ## Required R libraries
 <code>dismo</code>, <code>dplyr</code>, <code>galah</code>, <code>gawdis</code>, <code>gbm</code>, <code>ggplot2</code>, <code>gridExtra</code>, <code>mFD</code>, <code>readxl</code>,<code>sf</code>, <code>terra</code>
