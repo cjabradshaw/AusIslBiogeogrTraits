@@ -18,6 +18,16 @@ Bradshaw, CJA, A Naglis, F Saltré, C Mudge, J Llewelyn. Island biogeography sim
 - <code>islbiogeogrtraits.R</code>: R code for all analyses
 
 ## Data
+### GIS layers
+
+### Trait data
+#### Birds
+- AVONET1_Birdlife.xlsx: AVONET BirdLife traits dataset
+- AVONET2_eBird.xlsx: AVONET eBird traits dataset
+- AVONET3_BirdTree.xlsx: AVONET BirdTree traits dataset
+
+#### Mammals
+- SahulTraitsMam.csv: SahulTraits mammal traits database
 
 ## Required R libraries
 <code>dismo</code>, <code>dplyr</code>, <code>galah</code>, <code>gawdis</code>, <code>gbm</code>, <code>ggplot2</code>, <code>gridExtra</code>, <code>mFD</code>, <code>readxl</code>,<code>sf</code>, <code>terra</code>
