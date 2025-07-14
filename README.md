@@ -25,7 +25,7 @@ Bradshaw, CJA, A Naglis, F Saltré, C Mudge, J Llewelyn. Island biogeography sim
 - <em>amphislavala.zip</em>: Atlas of Living Australia data for amphibians species (shapefile).
 - <em>ausislands.zip</em>: Australian islands shapefile (Australian Albers Equal Area projection).
 - <em>ausislandsAlbersGeom_corrected.zip: Australian islands shapefile  (Australian Albers Equal Area projection) after removing ~ 30% of islands following criteria outlined in the main text.
-- <em>mainlandsLL.zip: mainlands (Australia and surrounding continents) in lat/lon datum.
+- <em>mainlandsLL.zip</em>: mainlands (Australia and surrounding continents) in lat/lon datum.
 
 ### Trait data
 #### Birds
