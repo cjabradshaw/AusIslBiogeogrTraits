@@ -1,5 +1,5 @@
 # Island biogeography predicts vertebrate trait space
-<img align="right" src="www/aus islands map.jpg" alt="islands of Australia" width="250" style="margin-bottom: 20px">
+<img align="right" src="www/aus islands map.jpg" alt="islands of Australia" width="350" style="margin-bottom: 20px">
 
 <br>
 Corey Bradshaw<br>
