@@ -23,7 +23,7 @@ Bradshaw, CJA, A Naglis, F Saltré, C Mudge, J Llewelyn. Island biogeography sim
 - <em>reptislavala.zip</em>: <a href="https://www.ala.org.au">Atlas of Living Australia</a> data for reptile species (shapefile).
 - <em>mamaislavala.zip</em>: <a href="https://www.ala.org.au">Atlas of Living Australia</a> data for mammal species (shapefile).
 - <em>amphislavala.zip</em>: <a href="https://www.ala.org.au">Atlas of Living Australia</a> data for amphibians species (shapefile).
-- <em>ausislands.zip</em>: Australian islands shapefile (Australian Albers Equal Area projection).
+- <em>ausislands.zip</em>: Australian islands shapefile (Australian Albers Equal Area projection). Derived from the <a href="http://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs-edition-3/jul2021-jun2026/access-and-downloads/digital-boundary-files">Australian Bureau of Statistics</a>.
 - <em>ausislandsAlbersGeom_corrected.zip</em>: Australian islands shapefile  (Australian Albers Equal Area projection) after removing ~ 30% of islands following criteria outlined in the main text.
 - <em>mainlandsLL.zip</em>: mainlands (Australia and surrounding continents) in lat/lon datum.
 
