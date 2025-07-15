@@ -3490,12 +3490,46 @@ sp_traits$Weaning.age..days.. <- NULL
 
 hist(sp_traits$trophic_level)
 
+# Log transform days to sexual maturity because it shows a log/log relationship with body size
 hist(sp_traits$Sexual.maturity..days..)
+sp_traits$Log_Sexual_maturity_days <- log(sp_traits$Sexual.maturity..days..)
+sp_traits$Sexual.maturity..days.. <- NULL
 
 hist(sp_traits$brain_mass_g)
 hist(log(sp_traits$brain_mass_g))
 sp_traits$Log_brain_mass <- log(sp_traits$brain_mass_g)
 sp_traits$brain_mass_g <- NULL
+
+colnames(sp_traits)
+str(sp_traits)
+
+# factors to factor format
+sp_traits$Sociality <- as.factor(sp_traits$Sociality)
+sp_traits$Plant..0.1. <- as.factor(sp_traits$Plant..0.1.)
+sp_traits$Terrestrial.vertebrate..0.1. <- as.factor(sp_traits$Terrestrial.vertebrate..0.1.)
+sp_traits$Fish..0.1. <- as.factor(sp_traits$Fish..0.1.)
+sp_traits$Invertebrate..0.1. <- as.factor(sp_traits$Invertebrate..0.1.)
+sp_traits$Carrion..0.1. <- as.factor(sp_traits$Carrion..0.1.)
+sp_traits$DigitsWebbed <- as.factor(sp_traits$DigitsWebbed)
+sp_traits$DigitsClaws <- as.factor(sp_traits$DigitsClaws)
+sp_traits$DigitsFlippers <- as.factor(sp_traits$DigitsFlippers)
+sp_traits$DigitsHooves <- as.factor(sp_traits$DigitsHooves)
+sp_traits$LocoAquatic <- as.factor(sp_traits$LocoAquatic)
+sp_traits$LocoArboreal <- as.factor(sp_traits$LocoArboreal)
+sp_traits$LocoFossorial <- as.factor(sp_traits$LocoFossorial)
+sp_traits$LocoGliding <- as.factor(sp_traits$LocoGliding)
+sp_traits$LocoCursorial <- as.factor(sp_traits$LocoCursorial)
+sp_traits$LocoSaltation <- as.factor(sp_traits$LocoSaltation)
+sp_traits$LocoTerrestrial <- as.factor(sp_traits$LocoTerrestrial)
+sp_traits$day_active <- as.factor(sp_traits$day_active)
+sp_traits$night_active <- as.factor(sp_traits$night_active)
+sp_traits$crepuscular_active <- as.factor(sp_traits$crepuscular_active)
+sp_traits$niche_aerial <- as.factor(sp_traits$niche_aerial)
+sp_traits$niche_arboreal <- as.factor(sp_traits$niche_arboreal)
+sp_traits$niche_ground <- as.factor(sp_traits$niche_ground)
+sp_traits$niche_marine <- as.factor(sp_traits$niche_marine)
+sp_traits$niche_scansorial <- as.factor(sp_traits$niche_scansorial)
+str(sp_traits)
 
 dim(sp_traits)
 
@@ -3507,7 +3541,7 @@ na_counts
 
 ## make list of mammal communities by island (FID)
 ausisles.mamala.traits.list <- split(ausisles.mamala.traits, ausisles.mamala.traits$FID)
-View(ausisles.mamala.traits.list[[which.max(sapply(ausisles.mamala.traits.list, nrow))]]) # view the island with the most records
+# View(ausisles.mamala.traits.list[[which.max(sapply(ausisles.mamala.traits.list, nrow))]]) # view the island with the most records
 
 # make a presence absence matrix with row = FID and colname = species
 combined_unique <- unique(ausisles.mamala.traits[, c("FID", "scientific")])
@@ -3532,15 +3566,15 @@ tt <- data.frame(trait_name = names(sp_traits), trait_type=NA)
 tt$trait_type[tt$trait_name %in% c("Sociality")] <- "N"
 tt$trait_type[tt$trait_name %in% c("Plant..0.1.","Terrestrial.vertebrate..0.1.","Fish..0.1.",
                                    "Invertebrate..0.1.","Carrion..0.1.",
-                                 "DigitsWebbed","DigitsClaws","DigitsFlippers","DigitsHooves",
-                                 "LocoAquatic","LocoArboreal","LocoFossorial","LocoGliding",
-                                 "LocoCursorial","LocoSaltation","LocoTerrestrial",
-                                 "day_active","night_active","crepuscular_active",
-                                 "niche_aerial","niche_arboreal","niche_ground","niche_marine",
-                                 "niche_scansorial")] <- "F"
-tt$trait_type[tt$trait_name %in% c("Total.body.Length_Mean..mm.","Sexual.maturity..days..","trophic_level",
+                                   "DigitsWebbed","DigitsClaws","DigitsFlippers","DigitsHooves",
+                                   "LocoAquatic","LocoArboreal","LocoFossorial","LocoGliding",
+                                   "LocoCursorial","LocoSaltation","LocoTerrestrial",
+                                   "day_active","night_active","crepuscular_active",
+                                   "niche_aerial","niche_arboreal","niche_ground","niche_marine",
+                                   "niche_scansorial")] <- "F"
+tt$trait_type[tt$trait_name %in% c("Total.body.Length_Mean..mm.","Log_Sexual_maturity_days","trophic_level",
                                    "Log_Body_mass","Log_TL","Log_SVL","Log_longevity","Log_Gestation_length",
-                                 "Log_clutch_size","Log_litters_yr","Log_weaning_age","Log_brain_mass")] <- "Q"
+                                   "Log_clutch_size","Log_litters_yr","Log_weaning_age","Log_brain_mass")] <- "Q"
 # add the fuzzy column
 tt$fuzzy_name[tt$trait_name %in% c("Plant..0.1.","Terrestrial.vertebrate..0.1.","Fish..0.1.",
                                    "Invertebrate..0.1.","Carrion..0.1.")] <- "diet"
@@ -3550,7 +3584,7 @@ tt$fuzzy_name[tt$trait_name %in% c("LocoAquatic","LocoArboreal","LocoFossorial",
 tt$fuzzy_name[tt$trait_name %in% c("day_active","night_active","crepuscular_active")] <- "activity_time"
 tt$fuzzy_name[tt$trait_name %in% c("niche_aerial","niche_arboreal","niche_ground","niche_marine",
                                    "niche_scansorial")] <- "niche"
-#tt$fuzzy_name <- ifelse(is.na(tt$fuzzy_name), tt$trait_name, tt$fuzzy_name)
+tt$fuzzy_name <- ifelse(is.na(tt$fuzzy_name), tt$trait_name, tt$fuzzy_name)
 
 # remove non-trait rows  
 tt <- tt[!tt$trait_name %in% c("scientific", "Limbs"),]
@@ -3581,6 +3615,9 @@ for (i in seq_len(nrow(tt))) {
   }
 }
 
+# remove fuzzy name for non-fuzzy columns
+tt$fuzzy_name <- ifelse(tt$fuzzy_name%in%c("diet","digits","locomotion","activity_time","niche"),tt$fuzzy_name, NA )
+
 # species traits summary:
 traits_summ <- mFD::sp.tr.summary(
   tr_cat     = tt,   
@@ -3608,8 +3645,49 @@ sp_traits$LocoSaltation <- NULL
 sp_traits$niche_marine <- NULL
 sp_traits$niche_scansorial <- NULL
 
-# no cut trait type df back to traits in sp_traits
+#remove redundant variable
+sp_traits$Log_SVL <- NULL
+
+# Check which are highly correlate with body mass
+nums <- c("Log_Sexual_maturity_days", "trophic_level", "Log_Body_mass", "Log_TL",  "Log_longevity",
+          "Log_Gestation_length", "Log_clutch_size", "Log_litters_yr", "Log_weaning_age", "Log_brain_mass")
+
+# for (col in nums) {
+#   # Calculate correlation (use complete.obs to ignore NAs)
+#   corr <- cor(sp_traits[[col]], sp_traits[["Log_Body_mass"]], use = "complete.obs")
+#   corr_text <- paste0("r = ", round(corr, 2))
+#   
+#   # Create the scatter plot
+#   plot(sp_traits[[col]], sp_traits[["Log_Body_mass"]],
+#        xlab = col, ylab = "Log mass",
+#        main = paste(corr_text))
+#   
+#   # Optional pause
+#   readline(prompt = "Press [Enter] to continue...")
+# }
+
+# TL, longevity, weaning age, and brain mass are all highly correlated (>0.6) with mass. Use residuals.
+sp_traits$Log_TLResid <- resid(lm(sp_traits$Log_Body_mass~sp_traits$Log_TL))
+sp_traits$Log_TL <- NULL
+sp_traits$Log_LongevityResid <- resid(lm(sp_traits$Log_Body_mass~sp_traits$Log_longevity))
+sp_traits$Log_longevity <- NULL
+sp_traits$Log_WeaningAgeResid <- resid(lm(sp_traits$Log_Body_mass~sp_traits$Log_weaning_age))
+sp_traits$Log_weaning_age <- NULL
+sp_traits$Log_BrainMassResid <- resid(lm(sp_traits$Log_Body_mass~sp_traits$Log_brain_mass))
+sp_traits$Log_brain_mass <- NULL
+
+# fix some names in tt
+tt <- tt[!tt$trait_name%in%c("DigitsFlippers","DigitsHooves","LocoGliding","LocoSaltation","niche_marine","niche_scansorial","Log_SVL"),]
+tt$trait_name[tt$trait_name=="Log_TL"] <- "Log_TLResid"
+tt$trait_name[tt$trait_name=="Log_longevity"] <- "Log_LongevityResid"
+tt$trait_name[tt$trait_name=="Log_weaning_age"] <- "Log_WeaningAgeResid"
+tt$trait_name[tt$trait_name=="Log_brain_mass"] <- "Log_BrainMassResid"
+
+# cut trait type df back to traits in sp_traits
 tt <- tt[tt$trait_name%in%names(sp_traits),]
+
+#reorder rows to match cols in sp_traits
+tt <- tt[match(names(sp_traits), tt$trait_name), ]
 
 sp_dist <- mFD::funct.dist(  # might want to change w.type
   sp_tr         = sp_traits,
@@ -3623,9 +3701,9 @@ sp_dist <- mFD::funct.dist(  # might want to change w.type
 # above appears to work but check with gawdis
 # calculate functional distances
 gaw.groups <- gawdis(sp_traits, w.type = "equal", 
-                   groups = c(1,2,3,3,3,3,3,4,5,5,6,6,6,6,6,7,7,7,8,8,8,9,10,11,12,13,14,15,16,17),
-                   fuzzy=c(3,5,6,7,8))   # warning about unbalanced distribution of some traits 
-                                         # (traits where most species belong to one category)   
+                     groups = c(1,2,2,2,2,2,3,4,4,5,5,5,5,5,6,6,6,7,7,7,8,9,10,11,12,13,14,15,16),
+                     fuzzy=c(3,5,6,7,8))   # warning about unbalanced distribution of some traits 
+# (traits where most species belong to one category) 
 
 # remove the unbalanced traits
 traits_to_remove <- c(
@@ -3639,18 +3717,26 @@ tt_clean <- tt[!(tt$trait_name %in% traits_to_remove), ]
 # rerun to calculate distances
 # calculate functional distances
 gdist <- gawdis(sp_traits_clean,w.type = "equal", 
-              groups = c(1,2,3,3,4,5,6,6,7,7,8,9,10,11,12,13,14,15,16,17),
-              fuzzy=c(3,6,7))      
+                groups = c(1,2,2,3,4,5,5,6,6,7,8,9,10,11,12,13,14,15,16),
+                fuzzy=c(3,6,7))      
 
 attr(gdist,"correls") # some traits contribute more to variation in trait space
 attr(gdist,"weights") # all have positive weights
 
 # compute multidimensional functional spaces (PCoA) and assess their quality
-qual <- quality.fspaces(sp_dist = gdist, fdendro = "average",maxdim_pcoa = 44,
+qual <- quality.fspaces(sp_dist = gdist, fdendro = "average",maxdim_pcoa = 19,
                         deviation_weighting = c("absolute", "squared"),fdist_scaling = c(TRUE, FALSE)) 
 
 # how much variation explained by each PCoA?
 round(qual$"quality_fspaces", 3)
+eigs <- qual$details_fspaces$pc_eigenvalues
+Esum <- sum(eigs$Eigenvalues)
+eigs$perc <- eigs$Eigenvalues/Esum
+cbind(rownames(eigs),cumsum(eigs$perc))
+plot(rownames(eigs),cumsum(eigs$perc))
+print(cumsum(eigs$perc)[2]) # 2 eigs explain 61% of variation
+print(cumsum(eigs$perc)[3]) # 3 eigs explain xx% of variation
+print(cumsum(eigs$perc)[4]) # 4 eigs  explain 78% of variation
 
 # position of species on PCoA axes
 sp_coords <- qual$details_fspaces$sp_pc_coord
@@ -3658,13 +3744,13 @@ sp_coords <- qual$details_fspaces$sp_pc_coord
 # calculate functional diversity indices
 # need matrix of 1s and 0s where row = community and column = species -> the presence_matrix
 # cut matrix to islands with 3 or more species
-rs <- which(rowSums(island_pres_mat) > 2)
+rs <- which(rowSums(island_pres_mat) > 3)
 enough <- island_pres_mat[rs,]
 
 dim(sp_coords)
 dim(enough)
 
-FD <- alpha.fd.multidim(sp_faxes_coord = sp_coords[,paste("PC",1:2, sep="")], asb_sp_w = as.matrix(enough)) # cut to islands with 3 or more species, can only use 2 PCoAs
+FD <- alpha.fd.multidim(sp_faxes_coord = sp_coords[,paste("PC",1:3, sep="")], asb_sp_w = as.matrix(enough)) # cut to islands with 3 or more species, can only use 2 PCoAs
 inds <- FD$functional_diversity_indices  
 inds$FID <- as.numeric(rownames(inds)) # add FID to indices
 
@@ -3710,6 +3796,7 @@ dim(SARlinpred.sort)
 head(ausisles.mamala.traitIndices)
 
 # output data for outside graphing
+setwd("~/Documents/Papers/Biogeography/Aus Isl traits/out")
 write.csv(SARlinpred.sort, file="AUS_SARlinpredmam.csv", row.names=FALSE)
 
 ## functional richness
@@ -3738,6 +3825,7 @@ dim(FRIClinpred.sort)
 head(ausisles.mamala.traitIndices)
 
 # output data for outside graphing
+setwd("~/Documents/Papers/Biogeography/Aus Isl traits/out")
 write.csv(FRIClinpred.sort, file="AUS_FRIClinpredmam.csv", row.names=FALSE)
 
 ## functional nearest-neighbour distance
@@ -3770,6 +3858,7 @@ dim(FNNDlinpred.sort)
 head(ausisles.mamala.traitIndices)
 
 # output data for outside graphing
+setwd("~/Documents/Papers/Biogeography/Aus Isl traits/out")
 write.csv(FNNDlinpred.sort, file="AUS_FNNDlinpredmam.csv", row.names=FALSE)
 
 
@@ -3843,6 +3932,7 @@ FD.SR.fnnd.plot
 mamTraitSRout <- merge(mamausislnoZero, ausisles.mamala.traitIndices, by="FID", all.x=F)
 head(mamTraitSRout)
 dim(mamTraitSRout)
+setwd("/Users/brad0317/Documents/Papers/Biogeography/Aus Isl traits/out")
 write.csv(mamTraitSRout, file="AUSislmamTraitSR.csv", row.names=FALSE)
 
 
@@ -3893,8 +3983,8 @@ keep <- c("Species1","Beak.Length_Culmen", "Beak.Length_Nares", "Beak.Width", "B
           "Range.Size")
 
 rm_keep <- c("Beak.Length_Culmen", "Secondary1","Kipps.Distance", "Mass.Source", "Mass.Refs.Other","Inference", 
-            "Traits.inferred", "Reference.species", "Habitat", "Trophic.Niche", "Min.Latitude", "Max.Latitude",
-            "Centroid.Latitude",  "Centroid.Longitude", "Range.Size") 
+             "Traits.inferred", "Reference.species", "Habitat", "Trophic.Niche", "Min.Latitude", "Max.Latitude",
+             "Centroid.Latitude",  "Centroid.Longitude", "Range.Size") 
 # removed "Habitat" and"Trophic.Niche" because there are similar variables with broader categories
 # (less problematic when calculating Gower distances)
 # removed distribution data to keep the island analyses independent of species distribution
@@ -3905,11 +3995,14 @@ keep <- keep[!keep%in%rm_keep]
 bl_traits <- bl[,names(bl) %in% keep]
 colnames(bl_traits)
 
+# remove the kiwis - the wing lengths and tail lengths are off
+bl_traits <- bl_traits[bl_traits$Wing.Length>0.1,]
+
 # check for correlations with mass
 # select only numeric columns
 numeric_data <- bl_traits[sapply(bl_traits, is.numeric)]
 
-# remove Mass column from set of predictors
+# remove Mass and non-numeric column from set of predictors
 other_vars <- setdiff(names(numeric_data), "Mass")
 
 # remove rows with NA or non-positive values (log requires positive numbers)
@@ -3922,11 +4015,40 @@ log_data <- log10(filtered_data)
 # compute correlations between log(Mass) and log(other variables)
 sapply(other_vars, function(col) cor(log_data[[col]], log_data$Mass))
 
-# Some are correlated with mass. Consider using residuals against mass for beak length, beak width, 
+# Set up plotting area: adjust number of rows/columns based on number of traits
+par(mfrow = c(3, 3))  # e.g., 3 rows and 3 columns = 9 plots
+
+# Loop through each trait
+for (trait in other_vars) {
+  plot(log_data[[trait]], log_data$Mass,
+       xlab = paste("log(", trait, ")", sep = ""),
+       ylab = "log(Mass)",
+       #main = paste("log(Mass) vs.", trait),
+       pch = 16, col = "darkgreen")
+}
+
+
+
+# Some are correlated with mass. 
+# Consider using residuals against mass for beak length, beak width, 
 # beak depth, tarsus length, wing length, and tail length
+logresids <- function (x,y) { LogResid <- resid(lm(log(x)~log(y))) }
+bl_traits$BeakLengthResids <- logresids(bl_traits$Mass,bl_traits$Beak.Length_Nares)
+bl_traits$Beak.Length_Nares <- NULL
+bl_traits$BeakWidthResids <- logresids(bl_traits$Mass,bl_traits$Beak.Width)
+bl_traits$Beak.Width <- NULL
+bl_traits$BeakDepthResids <- logresids(bl_traits$Mass,bl_traits$Beak.Depth)
+bl_traits$Beak.Depth <- NULL
+bl_traits$TarsusLengthResids <- logresids(bl_traits$Mass,bl_traits$Tarsus.Length)
+bl_traits$Tarsus.Length <- NULL
+bl_traits$WingLengthResids <- logresids(bl_traits$Mass,bl_traits$Wing.Length)
+bl_traits$Wing.Length <- NULL
+bl_traits$TailLengthResids <- logresids(bl_traits$Mass,bl_traits$Tail.Length)
+bl_traits$Tail.Length <- NULL
 
 # examine data
 colnames(bl_traits)
+str(bl_traits)
 bl_traits$Species1
 
 # any NAs?
@@ -3974,43 +4096,15 @@ avsp_traits$Log_Body_mass <- log(avsp_traits$Mass)
 hist(avsp_traits$Log_Body_mass)
 avsp_traits$Mass <- NULL
 
-hist(avsp_traits$Wing.Length) # needs to be log transformed (skewed) and renamed log...
-avsp_traits$Log_WL <- log(avsp_traits$Wing.Length)
-hist(avsp_traits$Log_WL)
-avsp_traits$Wing.Length <- NULL
-
-hist(avsp_traits$Tail.Length)
-avsp_traits$Log_TailL <- log(avsp_traits$Tail.Length)
-hist(avsp_traits$Log_TailL)
-avsp_traits$Tail.Length <- NULL
-
-hist(avsp_traits$Tarsus.Length)
-avsp_traits$Log_TarsL <- log(avsp_traits$Tarsus.Length)
-hist(avsp_traits$Log_TarsL)
-avsp_traits$Tarsus.Length <- NULL
-
-hist(avsp_traits$Beak.Length_Nares)
-avsp_traits$Log_BeakLNares <- log(avsp_traits$Beak.Length_Nares)
-hist(avsp_traits$Log_BeakLNares)
-avsp_traits$Beak.Length_Nares <- NULL
-
-hist(avsp_traits$Beak.Width)
-avsp_traits$Log_BeakW <- log(avsp_traits$Beak.Width)
-hist(avsp_traits$Log_BeakW)
-avsp_traits$Beak.Width <- NULL
-
-hist(avsp_traits$'Hand-Wing.Index')
-avsp_traits$Log_HWI <- log(avsp_traits$'Hand-Wing.Index')
-hist(avsp_traits$Log_HWI)
-avsp_traits$'Hand-Wing.Index' <- NULL
-
 table(avsp_traits$Migration)
 # str(avsp_traits$Migration)
 # avsp_traits$Migration <- as.integer(avsp_traits$Migration) # change to integer
 # str(avsp_traits$Migration)
 # hist(avsp_traits$Migration)
+avsp_traits$Migration <- as.factor(avsp_traits$Migration)
+avsp_traits$Habitat.Density <- as.factor(avsp_traits$Habitat.Density)
+avsp_traits$Primary.Lifestyle <- as.factor(avsp_traits$Primary.Lifestyle)
 
-str(avsp_traits$Trophic.Level)
 table(avsp_traits$Trophic.Level)
 
 # check trophic level from mammals for recoding birds
@@ -4018,14 +4112,14 @@ mamtraits$scientific
 mamtraits[which(mamtraits$scientific == "Sarcophilus harrisii"),"trophic_level"] # carnivore trophic level = 3
 mamtraits[which(mamtraits$scientific == "Wallabia bicolor"),"trophic_level"] # herbivore trophic level = 1
 
-avsp_traits$trophic_level <- as.integer(ifelse(avsp_traits$Trophic.Level == "Carnivore", 3,
-                                      ifelse(avsp_traits$Trophic.Level == "Herbivore", 1,
-                                        ifelse(avsp_traits$Trophic.Level == "Omnivore", 2, NA))))
+avsp_traits$trophic_level <- as.factor(ifelse(avsp_traits$Trophic.Level == "Carnivore", 3,
+                                               ifelse(avsp_traits$Trophic.Level == "Herbivore", 1,
+                                                      ifelse(avsp_traits$Trophic.Level == "Omnivore", 2, NA))))
 table(avsp_traits$trophic_level)
 avsp_traits$Trophic.Level <- NULL
 
 table(avsp_traits$Habitat.Density)
- 
+
 table(avsp_traits$Primary.Lifestyle)
 
 # any NAs?
@@ -4035,12 +4129,14 @@ na_counts4
 dim(avsp_traits)
 avsp_traits$Species1
 
-
 # check for NAs
 na_counts <- sapply(avsp_traits, function(x) sum(is.na(x)))
 na_counts
 
-## make list of mammal communities by island (FID)
+# check structure
+str(avsp_traits)
+
+## make list of bird communities by island (FID)
 ausisles.avala.traits.list <- split(ausisles.avala.traits, ausisles.avala.traits$FID)
 #View(ausisles.avala.traits.list[[which.max(sapply(ausisles.avala.traits.list, nrow))]]) # view the island with the most records
 
@@ -4071,11 +4167,9 @@ avtt <- data.frame(trait_name = names(avsp_traits), trait_type=NA)
 # fix the trait_type column
 avtt$trait_name
 avtt$trait_type[avtt$trait_name %in% c("Primary.Lifestyle")] <- "N"
-avtt$trait_type[avtt$trait_name %in% c("Habitat.Density","Migration")] <- "O"
-avtt$trait_type[avtt$trait_name %in% c("Beak.Depth","Log_HWI","trophic_level",
-                                   "Log_Body_mass","Log_WL","Log_TailL","Log_BeakLNares","Log_TarsL",
-                                   "Log_BeakW","Log_litters_yr",
-                                   "Log_weaning_age","Log_brain_mass")] <- "Q"
+avtt$trait_type[avtt$trait_name %in% c("Habitat.Density","Migration","trophic_level")] <- "O"
+avtt$trait_type[avtt$trait_name %in% c("Hand-Wing.Index","BeakLengthResids","BeakWidthResids","BeakDepthResids","TarsusLengthResids", 
+                                       "WingLengthResids", "TailLengthResids", "Log_Body_mass")] <- "Q"
 avtt$trait_type
 
 # add the fuzzy column
@@ -4109,7 +4203,7 @@ for (i in seq_len(nrow(avtt))) {
     } else if (type == "Q" || type == "F") {
       avsp_traits[[trait]] <- as.numeric(avsp_traits[[trait]])
     } else if (type == "O") {
-        avsp_traits[[trait]] <- as.ordered(avsp_traits[[trait]])
+      avsp_traits[[trait]] <- as.ordered(avsp_traits[[trait]])
     } else {
       warning(paste("unknown trait type for", trait))
     }
@@ -4149,10 +4243,11 @@ isl_summ$"asb_sp_richn" # sp richness by island (non-zero only)
 #avsp_traits$niche_marine <- NULL
 #avsp_traits$niche_scansorial <- NULL
 
-# no cut trait type df back to traits in sp_traits
+# cut trait type df back to traits in sp_traits
 avtt <- avtt[avtt$trait_name %in% names(avsp_traits),]
 
-sp_dist <- mFD::funct.dist(  # might want to change w.type
+# calculate Gower distances using funct.dist()
+sp_dist <- mFD::funct.dist(  # can use funct.dist (here) or gawdis (below) to calculate Gower distances
   sp_tr         = avsp_traits,
   tr_cat        = avtt,
   metric        = "gower",
@@ -4161,36 +4256,26 @@ sp_dist <- mFD::funct.dist(  # might want to change w.type
   weight_type   = "equal",
   stop_if_NA    = TRUE)
 
-# above appears to work but check with gawdis
-# calculate functional distances
-colnames(avsp_traits)
-gdist <- gawdis(avsp_traits, w.type = "equal", 
-                     groups = c(1,2,3,4,1,1,1,1,1,1,1,5)) 
+# calculate Gower distances using gawdis
+gdist <- gawdis(avsp_traits, w.type = "equal") 
 
-# # remove the unbalanced traits
-# traits_to_remove <- c(
-#   "Terrestrial.vertebrate..0.1.", "Fish..0.1.", "Carrion..0.1.",
-#   "DigitsClaws", "LocoAquatic", "LocoFossorial", "LocoCursorial",
-#   "day_active", "niche_aerial", "niche_arboreal"
-# )
-# sp_traits_clean <- sp_traits[, !(names(sp_traits) %in% traits_to_remove)]
-# tt_clean <- tt[!(tt$trait_name %in% traits_to_remove), ]
-
-# rerun to calculate distances
-# calculate functional distances
-# gdist <- gawdis(sp_traits_clean,w.type = "equal", 
-#                 groups = c(1,2,3,3,4,5,6,6,7,7,8,9,10,11,12,13,14,15,16,17),
-#                 fuzzy=c(3,6,7))      
-
-attr(gdist,"correls") # some traits contribute more to variation in trait space
+attr(gdist,"correls") # similar contribution from all traits
 attr(gdist,"weights") # all have positive weights
 
 # compute multidimensional functional spaces (PCoA) and assess their quality
-qual <- quality.fspaces(sp_dist = gdist, fdendro = "average", maxdim_pcoa = 44,
+qual <- quality.fspaces(sp_dist = gdist, fdendro = "average", maxdim_pcoa = 12,
                         deviation_weighting = c("absolute", "squared"), fdist_scaling = c(TRUE, FALSE)) 
 
 # how much variation explained by each PCoA?
 round(qual$"quality_fspaces", 3)
+eigs <- qual$details_fspaces$pc_eigenvalues
+Esum <- sum(eigs$Eigenvalues)
+eigs$perc <- eigs$Eigenvalues/Esum
+cbind(rownames(eigs),cumsum(eigs$perc))
+plot(rownames(eigs),cumsum(eigs$perc))
+print(cumsum(eigs$perc)[2]) # 56%
+print(cumsum(eigs$perc)[3]) # 67%
+print(cumsum(eigs$perc)[4]) # 76%
 
 # position of species on PCoA axes
 sp_coords <- qual$details_fspaces$sp_pc_coord
@@ -4198,15 +4283,15 @@ sp_coords <- qual$details_fspaces$sp_pc_coord
 # calculate functional diversity indices
 # need matrix of 1s and 0s where row = community and column = species -> the presence_matrix
 # cut matrix to islands with 3 or more species
-rs <- which(rowSums(island_pres_mat) > 2)
+rs <- which(rowSums(island_pres_mat) > 3)
 enough <- island_pres_mat[rs,]
 
 dim(sp_coords)
 dim(enough)
 
-FD <- alpha.fd.multidim(sp_faxes_coord = sp_coords[,paste("PC",1:2, sep="")],
+FD <- alpha.fd.multidim(sp_faxes_coord = sp_coords[,paste("PC",1:3, sep="")],
                         asb_sp_w = as.matrix(enough)) # cut to islands with 3 or more species,
-                                                      # can only use 2 PCoAs
+# can only use 2 PCoAs
 avinds <- FD$functional_diversity_indices  
 avinds$FID <- as.numeric(rownames(avinds)) # add FID to indices
 
@@ -4253,6 +4338,7 @@ dim(SARlinpred.sort)
 head(ausisles.avala.traitIndices)
 
 # output data for outside graphing
+setwd("~/Documents/Papers/Biogeography/Aus Isl traits/out")
 write.csv(SARlinpred.sort, file="AUS_SARlinpredav.csv", row.names=FALSE)
 
 ## functional richness
@@ -4281,6 +4367,7 @@ dim(FRIClinpred.sort)
 head(ausisles.mamala.traitIndices)
 
 # output data for outside graphing
+setwd("~/Documents/Papers/Biogeography/Aus Isl traits/out")
 write.csv(FRIClinpred.sort, file="AUS_FRIClinpredav.csv", row.names=FALSE)
 
 ## functional nearest-neighbour distance
@@ -4313,6 +4400,7 @@ dim(FNNDlinpred.sort)
 head(ausisles.mamala.traitIndices)
 
 # output data for outside graphing
+setwd("~/Documents/Papers/Biogeography/Aus Isl traits/out")
 write.csv(FNNDlinpred.sort, file="AUS_FNNDlinpredav.csv", row.names=FALSE)
 
 
@@ -4400,6 +4488,7 @@ FD.SR.fnnd.plot
 avTraitSRout <- merge(avausislnoZero, ausisles.avala.traitIndices, by="FID", all.x=F)
 head(avTraitSRout)
 dim(avTraitSRout)
+setwd("/Users/brad0317/Documents/Papers/Biogeography/Aus Isl traits/out")
 write.csv(avTraitSRout, file="AUSislavTraitSR.csv", row.names=FALSE)
 
 hist(logit(avTraitSRout$fric))
@@ -4410,6 +4499,9 @@ head(avTraitSRout)
 avTraitSRout$lSR.sc <- scale(avTraitSRout$lSR, center = TRUE, scale = TRUE)
 avTraitSRout$lfric.sc <- scale(logit(avTraitSRout$fric), center = TRUE, scale = TRUE)
 
+SARlinfit.sc <- lm(lSR.sc ~ log10(area_2.x/1e6), data=avTraitSRout)
+summary(SARlinfit.sc)
+
 FRIClinfit.sc <- lm(lfric.sc ~ log10(area_2.x/1e6), data=avTraitSRout)
 summary(FRIClinfit.sc)
 plot(log10(avTraitSRout$area_2.x/1e6), avTraitSRout$lfric.sc, xlab="island area (km2)",
@@ -4417,5 +4509,6 @@ plot(log10(avTraitSRout$area_2.x/1e6), avTraitSRout$lfric.sc, xlab="island area 
 abline(FRIClinfit.sc, col="red", lwd=2, lty=2)
 
 
+                     
 ## save workspace
 save.image(file="AUS_Isl_traits.RData")
